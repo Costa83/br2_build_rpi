@@ -1,0 +1,4 @@
+menu "Custom packages"
+source "$BR2_EXTERNAL_STT_ENV_PATH/package/stt_ihm/Config.in"
+source "$BR2_EXTERNAL_STT_ENV_PATH/package/influxdb_golang_test/Config.in"
+endmenu
