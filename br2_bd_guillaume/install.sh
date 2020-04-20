@@ -255,6 +255,15 @@ Depuis la RPI4 : # ping 192.168.0.10
 ####################################################################
 ####################################################################
 
+		ETAPE 6 se connecter en SSH à la carte RPI buildroot
+
+Depuis le PC host :
+
+$ ssh root@192.168.0.11
+tapez entrée puis le mot de passe root de la rpi4 : "gucos83"
+
+Vous avez maintenant la main sur le terminal de la rpi4.
+
 
 
 
