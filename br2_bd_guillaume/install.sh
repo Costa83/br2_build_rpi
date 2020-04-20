@@ -9,6 +9,8 @@ g++
 openssl-dev
 ncurces-dev
 
+########################################################
+		STEP 0
 
 Téléchargement de buildroot  depuis le site offciel :
 
@@ -17,6 +19,8 @@ cp buildroot-2018.05.tar.bz2 ~
 cd ~
 [~]$ tar -xjf buildroot-2018.05.tar.bz2
 
+########################################################
+		STEP 0
 
 Installation de buildroot pour tous projets : 
 
@@ -27,6 +31,8 @@ Installation de buildroot pour tous projets :
 [buildroot]# mkdir dl
 [buildroot]# chmod a+w ./dl
 
+########################################################
+		STEP 0
 
 Création du répertoire de travail :
 
@@ -37,7 +43,8 @@ Création du répertoire de travail :
 [repertoire projet/stt_env]$ touch external.mk
 [repertoire projet/stt_env]$ mkdir board configs overlays patches package
 
-
+########################################################
+		STEP 0
 
 Configuration du répertoire de travail : 
 
@@ -46,6 +53,8 @@ Configuration du répertoire de travail :
 [repertoire projet/stt_env/configs]$ cp opt/buildroot/configs/raspberry4_defconfig stt_env_defconfig
 
 
+########################################################
+		STEP 1
 
 Préparation de l’environnement :
 
@@ -94,6 +103,8 @@ BR2_ROOTFS_POST_BUILD_SCRIPT="board/raspberrypi4/post-build.sh"
 BR2_ROOTFS_POST_IMAGE_SCRIPT="board/raspberrypi4/post-image.sh"
 BR2_ROOTFS_POST_SCRIPT_ARGS="--add-miniuart-bt-overlay"
 
+########################################################
+		STEP 2
 
 Ajout du projet à un git :
 
@@ -124,6 +135,10 @@ source "$BR2_EXTERNAL_PROJECT_PATH/package/my_dev/Config.in"
 [project]$ cd output
 [output]$ make menuconfig
 
+
+
+########################################################
+		STEP 3
 Génération de l'image système :
 
 
@@ -158,6 +173,102 @@ Permet de réutiliser une configuration avec une version postérieur de Buildroo
 
 
 $ make
+
+########################################################
+
+			STEP 4
+
+Téléversement de l’image générée sur une carte uSD :
+
+
+Insérer la carte uSD sur le PC.
+
+S’assurer que la carte SD est bien démontée.
+
+[repertoire projet]$  sudo umount /dev/sdb1
+[repertoire projet]$  sudo umount /dev/sdb2
+
+Ecrire l’image « sdcard.img » sur la carte uSD dev/mmcblk0 avec un bloc size de 1M
+
+[repertoire projet]$  dd if=output/images/sdcard.img of=/dev/sdb bs=1M
+
+29 secondes environ sur ubunto 18.4 et sdcard de type :
+
+On insère la carte sur la raspberry Pi 4, on l’alimente avec le port usb C,
+ on branche le lien série de debug (Rouge|Noir|Bleu|Vert (colonne de broches extérieure en partant du cable (coté opposé au porrs USB) et on visualise le lien série avec l’outil minicom : 
+
+
+Vérier que le système a bien détecté le port sur lequel on vient de se brancher avec dmesg | grep tty
+On configure ensuite minicom avec la commande :
+
+[repertoire projet]$  sudo su
+[repertoire projet]$  minicom -s
+On mets dans configuration du port série -> port série : /dev/ttyUSB0 puis entrée , puis configurer la vitesse de transmission à 115200 ainsi que veiller à ce que hardware flow control soit à 
+enregistrer la configuration sous : "usb0" et entrer et sortir de minicom
+
+[repertoire projet]$  minicom -D /dev/ttyUSB0 usb0
+
+####################################################################
+####################################################################
+
+
+ 			STEP 5 : Connecting the raspberry to network
+
+Connecter un cable ethernet du PC host à la carte RPI4 (port ethernet).
+
+Attribution d'une IP statique sur la RPI4 ainsi que sur le PC host.
+Sur le PC host : 192.168.10 (0 pour O de host)
+Dans parametre filaire sous ubuntu-> Fenetre IPV4 -> Décocher automatique et cocher manuel pour la méthode IPV4, puis attribuer une IP fixe : 
+	Adresse 192.168.0.10   Maque de réseau 255.255.255.0  Passerelle : 192.168.0.1
+
+Sur la RPI4 : 192.168.0.90
+Editer le fichier /etc/network/interfaces
+
+[repertoire projet]$  vi /etc/network/interfaces
+
+iface eth0 inet static
+  address 192.168.0.11
+  netmask 255.255.255.0
+
+Sauvegarder avec vi le fichier interfaces (: puis x! et entrée)
+
+Activer l'interface eth0 avec la commande :
+
+[repertoire projet]$  ifup eth0
+
+Vérifiez que l'interface eth0 est bien montée: inet addr doit etre fixé à 192.168.0.11
+
+[repertoire projet]$  ifconfig
+
+# ifconfig                                                                      
+eth0      Link encap:Ethernet  HWaddr DC:A6:32:04:A4:8A                         
+          inet addr:192.168.0.11  Bcast:0.0.0.0  Mask:255.255.255.0             
+          inet6 addr: fe80::dea6:32ff:fe04:a48a/64 Scope:Link 
+
+Tester la connexion sur le sous réseau avec la commande ping :
+
+Depuis le PC host : costa@costa-Latitude-5590:~$ ping 192.168.0.11
+
+Depuis la RPI4 : # ping 192.168.0.10
+
+
+####################################################################
+####################################################################
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
 
 
 
