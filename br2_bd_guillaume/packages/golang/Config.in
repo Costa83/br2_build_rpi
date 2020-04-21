@@ -1,0 +1,5 @@
+config BR2_PACKAGE_GOLANG
+    bool "golang"
+    help
+        Go is an open source programming language that makes it easy to build simple, reliable, and efficient software.
+
