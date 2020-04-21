@@ -1,4 +1,4 @@
-#!/bin/bash
+﻿#!/bin/bash
 
 # 1
 echo 'Installing br2 for raspberry Pi 4'
@@ -190,7 +190,7 @@ S’assurer que la carte SD est bien démontée.
 
 Ecrire l’image « sdcard.img » sur la carte uSD dev/mmcblk0 avec un bloc size de 1M
 
-[repertoire projet]$  dd if=output/images/sdcard.img of=/dev/sdb bs=1M
+[repertoire projet]$  sudo dd if=output/images/sdcard.img of=/dev/sdb bs=1M
 
 29 secondes environ sur ubunto 18.4 et sdcard de type :
 
