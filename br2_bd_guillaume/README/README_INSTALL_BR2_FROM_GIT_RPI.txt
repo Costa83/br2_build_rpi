@@ -1,4 +1,4 @@
-INSTALL ENV BR2 DEPUIS LE GIT :
+﻿INSTALL ENV BR2 DEPUIS LE GIT :
 #######################################
 
 
@@ -59,7 +59,7 @@ Ecrire l’image « sdcard.img » sur la carte uSD dev/mmcblk0 avec un bloc si
 
 [repertoire projet]$ sudo dd if=output/images/sdcard.img of=/dev/sdb bs=1M
 
-29 secondes environ sur ubunto 18.4 et sdcard de type :
+29 secondes environ sur ubunto 18.4.
 
 On *ure en partant du cable (coté opposé au porrs USB) et on visualise le lien série avec l’outil minicom : 
 

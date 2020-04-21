@@ -134,8 +134,15 @@ LIB = -lsqlite3
 scp sqlite/script_test/* root@192.168.0.11:/usr/test_sqlite
 
 
+rpi# cd usr/test_sqlite/
+rpi# chmod +x *
+rpi# ./sttTestInsertRowsSqlite -i10
+rpi# sqlite3 test_sqlite.db
+
 
 (Reste plus qu’à automatiser l’accord des droits avec chmod et le lancement du script SH)
+
+
 
 
 
