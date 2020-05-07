@@ -3,6 +3,7 @@
 # 1
 echo 'Installing br2 for raspberry Pi 4'
 
+git
 make
 gcc
 g++
