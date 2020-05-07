@@ -9,6 +9,7 @@ gcc
 g++
 openssl-dev
 ncurces-dev
+build-essential
 
 ########################################################
 		STEP 0
