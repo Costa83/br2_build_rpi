@@ -37,26 +37,22 @@
 - [repertoire projet]$ mkdir stt_env
 - [repertoire projet]$ cd stt_env
 - [repertoire projet/stt_env]$ touch external.desc
-[repertoire projet/stt_env]$ touch Config.in
-[repertoire projet/stt_env]$ touch external.mk
-[repertoire projet/stt_env]$ mkdir board configs overlays patches package
+- [repertoire projet/stt_env]$ touch Config.in
+- [repertoire projet/stt_env]$ touch external.mk
+- [repertoire projet/stt_env]$ mkdir board configs overlays patches package
 
-########################################################
-		STEP 0
+## STEP 3 :
+* Configuration du répertoire de travail : 
 
-Configuration du répertoire de travail : 
+- [repertoire projet/stt_env]$ cd configs
+- [repertoire projet/stt_env/configs]$ touch stt_env_defconfig	
+- [repertoire projet/stt_env/configs]$ cp opt/buildroot/configs/raspberry4_defconfig stt_env_defconfig
 
-[repertoire projet/stt_env]$ cd configs
-[repertoire projet/stt_env/configs]$ touch stt_env_defconfig	
-[repertoire projet/stt_env/configs]$ cp opt/buildroot/configs/raspberry4_defconfig stt_env_defconfig
+## STEP 4 :
 
+* Préparation de l’environnement :
 
-########################################################
-		STEP 1
-
-Préparation de l’environnement :
-
-[repertoire projet]$make O=${PWD}/output BR2_EXTERNAL=${PWD} -C /opt/buildroot stt_env_defconfig
+- [repertoire projet]$make O=${PWD}/output BR2_EXTERNAL=${PWD} -C /opt/buildroot stt_env_defconfig
 
 BR2_DEFCONFIG="$(BR2_EXTERNAL_PROJECT_PATH)/configs/br2_bd_guillaume_defconfig"
 BR2_DL_DIR="/opt/buildroot/dl"
@@ -70,7 +66,7 @@ BR2_TOOLCHAIN_BUILDROOT_CXX=y
 
 BR2_SYSTEM_DHCP="eth0"
 
-# Linux headers same as kernel, a 4.19 series
+-# Linux headers same as kernel, a 4.19 series
 BR2_PACKAGE_HOST_LINUX_HEADERS_CUSTOM_4_19=y
 
 BR2_LINUX_KERNEL=y
@@ -78,7 +74,7 @@ BR2_LINUX_KERNEL_CUSTOM_TARBALL=y
 BR2_LINUX_KERNEL_CUSTOM_TARBALL_LOCATION="$(call github,raspberrypi,linux,4f2a4cc501c428c940549f39d5562e60404ac4f7)/linux-4f2a4cc501c428c940549f39d5562e60404ac4f7.tar.gz"
 BR2_LINUX_KERNEL_DEFCONFIG="bcm2711"
 
-# Build the DTB from the kernel sources
+-# Build the DTB from the kernel sources
 BR2_LINUX_KERNEL_DTS_SUPPORT=y
 BR2_LINUX_KERNEL_INTREE_DTS_NAME="bcm2711-rpi-4-b"
 
@@ -87,34 +83,31 @@ BR2_LINUX_KERNEL_NEEDS_HOST_OPENSSL=y
 BR2_PACKAGE_RPI_FIRMWARE=y
 BR2_PACKAGE_RPI_FIRMWARE_VARIANT_PI4=y
 
-# Required tools to create the SD image
+-# Required tools to create the SD image
 BR2_PACKAGE_HOST_DOSFSTOOLS=y
 BR2_PACKAGE_HOST_GENIMAGE=y
 BR2_PACKAGE_HOST_MTOOLS=y
 
-# Filesystem / image
+-# Filesystem / image
 BR2_TARGET_ROOTFS_EXT2=y
 BR2_TARGET_ROOTFS_EXT2_4=y
 BR2_TARGET_ROOTFS_EXT2_SIZE="120M"
-# BR2_TARGET_ROOTFS_TAR is not set
+-# BR2_TARGET_ROOTFS_TAR is not set
 BR2_ROOTFS_POST_BUILD_SCRIPT="board/raspberrypi4/post-build.sh"
 BR2_ROOTFS_POST_IMAGE_SCRIPT="board/raspberrypi4/post-image.sh"
 BR2_ROOTFS_POST_SCRIPT_ARGS="--add-miniuart-bt-overlay"
 
-########################################################
-		STEP 2
+## STEP 4:
 
-Ajout du projet à un git :
+* Ajout du projet à un git : Permet d’identifer les étapes de construction du système.
 
-Permet d’identifer les étapes de construction du système.
-[repertoire projet]$ git init
-[repertoire projet]$ git add external.desc
-[repertoire projet]$ git add external.mk
-[repertoire projet]$ git add Config.in
-Permet d’identifer les étapes de construction du système.
-[project]$ git remote add origin  https://git.company.com/project
-[project]$ git push origin master
-$ git show –pretty=--name-only     #Pour afficher les fichiers qui ont été commit.
+- [repertoire projet]$ git init
+- [repertoire projet]$ git add external.desc
+- [repertoire projet]$ git add external.mk
+- [repertoire projet]$ git add Config.in
+- [project]$ git remote add origin  https://git.company.com/project
+- [project]$ git push origin master
+- $ git show –pretty=--name-only     #Pour afficher les fichiers qui ont été commit.
 
 
 Utiliser les outils proposer par Buildroot :
@@ -135,9 +128,8 @@ source "$BR2_EXTERNAL_PROJECT_PATH/package/my_dev/Config.in"
 
 
 
-########################################################
-		STEP 3
-Génération de l'image système :
+## STEP 5:
+* Génération de l'image système :
 
 
 Vérifier que le fichier bcm2711 est bien sélectionné, que le fichier dts est bien sélectionné, ainsi que le fichier stt_env_defconfig, ainsi que l’option build device tree blob.
@@ -172,28 +164,22 @@ Permet de réutiliser une configuration avec une version postérieur de Buildroo
 
 $ make
 
-########################################################
-
-			STEP 4
-
-Téléversement de l’image générée sur une carte uSD :
+## STEP 6:
+*Téléversement de l’image générée sur une carte uSD :
 
 
-Insérer la carte uSD sur le PC.
+- Insérer la carte uSD sur le PC.
+- S’assurer que la carte SD est bien démontée.
+- [repertoire projet]$  sudo umount /dev/sdb1
+- [repertoire projet]$  sudo umount /dev/sdb2
+- Ecrire l’image « sdcard.img » sur la carte uSD dev/mmcblk0 avec un bloc size de 1M
 
-S’assurer que la carte SD est bien démontée.
+- [repertoire projet]$  sudo dd if=output/images/sdcard.img of=/dev/sdb bs=1M
 
-[repertoire projet]$  sudo umount /dev/sdb1
-[repertoire projet]$  sudo umount /dev/sdb2
+- 29 secondes environ sur ubuntu 18.4.
 
-Ecrire l’image « sdcard.img » sur la carte uSD dev/mmcblk0 avec un bloc size de 1M
-
-[repertoire projet]$  sudo dd if=output/images/sdcard.img of=/dev/sdb bs=1M
-
-29 secondes environ sur ubunto 18.4 et sdcard de type :
-
-On insère la carte sur la raspberry Pi 4, on l’alimente avec le port usb C,
- on branche le lien série de debug (Rouge|Noir|Bleu|Vert (colonne de broches extérieure en partant du cable (coté opposé au porrs USB) et on visualise le lien série avec l’outil minicom : 
+- On insère la carte sur la raspberry Pi 4, on l’alimente avec le port usb C,
+- On branche le lien série de debug (Rouge|Noir|Bleu|Vert (colonne de broches extérieure en partant du cable (coté opposé au porrs USB) et on visualise le lien série avec l’outil minicom : 
 
 
 Vérier que le système a bien détecté le port sur lequel on vient de se brancher avec dmesg | grep tty
@@ -206,11 +192,7 @@ enregistrer la configuration sous : "usb0" et entrer et sortir de minicom
 
 [repertoire projet]$  minicom -D /dev/ttyUSB0 usb0
 
-####################################################################
-####################################################################
-
-
- 			STEP 5 : Connecting the raspberry to network
+## STEP 7 : Connecting the raspberry to network
 
 Connecter un cable ethernet du PC host à la carte RPI4 (port ethernet).
 
@@ -238,7 +220,7 @@ Vérifiez que l'interface eth0 est bien montée: inet addr doit etre fixé à 19
 
 [repertoire projet]$  ifconfig
 
-# ifconfig                                                                      
+- # ifconfig                                                                      
 eth0      Link encap:Ethernet  HWaddr DC:A6:32:04:A4:8A                         
           inet addr:192.168.0.11  Bcast:0.0.0.0  Mask:255.255.255.0             
           inet6 addr: fe80::dea6:32ff:fe04:a48a/64 Scope:Link 
@@ -250,39 +232,10 @@ Depuis le PC host : costa@costa-Latitude-5590:~$ ping 192.168.0.11
 Depuis la RPI4 : # ping 192.168.0.10
 
 
-####################################################################
-####################################################################
+## STEP 7:  se connecter en SSH à la carte RPI buildroot
 
-		ETAPE 6 se connecter en SSH à la carte RPI buildroot
+* Depuis le PC host :
 
-Depuis le PC host :
-
-$ ssh root@192.168.0.11
-tapez entrée puis le mot de passe root de la rpi4 : "gucos83"
-
-Vous avez maintenant la main sur le terminal de la rpi4.
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
+- $ ssh root@192.168.0.11
+- Tapez entrée puis le mot de passe root de la rpi4 : "gucos83"
+- Vous avez maintenant la main sur le terminal de la rpi4.
