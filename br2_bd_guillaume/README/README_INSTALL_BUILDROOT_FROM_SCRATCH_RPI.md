@@ -1,45 +1,42 @@
-* Installing br2 for raspberry Pi 4'
+# Installing br2 for raspberry Pi 4'
+## Tools to install on host with apt install :
+- git
+- make
+- gcc
+- g++
+- openssl-dev
+- ncurces-dev
+- build-essential
+- minicom
 
-git
-make
-gcc
-g++
-openssl-dev
-ncurces-dev
-build-essential
-minicom
 
+## STEP 0
 
-########################################################
-		STEP 0
+- Téléchargement de buildroot  depuis le site offciel :
 
-Téléchargement de buildroot  depuis le site offciel :
+- $ wget https://buildroot.org/downloads/buildroot-2018.05.tar.bz2
+- $ cp buildroot-2018.05.tar.bz2 ~
+- $ cd ~
+- [~]$ tar -xjf buildroot-2018.05.tar.bz2
 
-wget https://buildroot.org/downloads/buildroot-2018.05.tar.bz2
-cp buildroot-2018.05.tar.bz2 ~
-cd ~
-[~]$ tar -xjf buildroot-2018.05.tar.bz2
+## STEP 1
 
-########################################################
-		STEP 0
+* Installation de buildroot pour tous projets : 
 
-Installation de buildroot pour tous projets : 
+- [~]$ sudo su
+- [~]# cd /opt
+- [opt]# git clone git://git.buildroot.net/buildroot
+- [opt]# cd buidlroot
+- [buildroot]# mkdir dl
+- [buildroot]# chmod a+w ./dl
 
-[~]$ sudo su
-[~]# cd /opt
-[opt]# git clone git://git.buildroot.net/buildroot
-[opt]# cd buidlroot
-[buildroot]# mkdir dl
-[buildroot]# chmod a+w ./dl
+## STEP 2
 
-########################################################
-		STEP 0
+* Création du répertoire de travail :
 
-Création du répertoire de travail :
-
-[repertoire projet]$ mkdir stt_env
-[repertoire projet]$ cd stt_env
-[repertoire projet/stt_env]$ touch external.desc
+- [repertoire projet]$ mkdir stt_env
+- [repertoire projet]$ cd stt_env
+- [repertoire projet/stt_env]$ touch external.desc
 [repertoire projet/stt_env]$ touch Config.in
 [repertoire projet/stt_env]$ touch external.mk
 [repertoire projet/stt_env]$ mkdir board configs overlays patches package
