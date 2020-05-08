@@ -1,4 +1,4 @@
-# Installing br2 for raspberry Pi 4'
+* Installing br2 for raspberry Pi 4'
 
 git
 make
