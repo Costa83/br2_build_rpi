@@ -187,7 +187,7 @@ On configure ensuite minicom avec la commande :
 
 [repertoire projet]$  sudo su
 [repertoire projet]$  minicom -s
-On mets dans configuration du port série -> port série : /dev/ttyUSB0 puis entrée , puis configurer la vitesse de transmission à 115200 ainsi que veiller à ce que hardware flow control soit à 
+On mets dans configuration du port série -> port série : /dev/ttyUSB0 puis entrée , puis configurer la vitesse de transmission à 115200 ainsi que veiller à ce que hardware flow control soit à non,
 enregistrer la configuration sous : "usb0" et entrer et sortir de minicom
 
 [repertoire projet]$  minicom -D /dev/ttyUSB0 usb0
