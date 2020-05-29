@@ -50,6 +50,7 @@ libtool: install: /usr/bin/install -c sqlite3 /home/costa/SMILE_STAGE/SOURCES_GI
 - $ sqlite3
 
 - Le prompt de sqlite3 devrait s’afficher sur le terminal rpi
+- sqlite3> select * from STT;
 
 ## Copie des excutables de tests développés pour raspbian sur br2 :
 
