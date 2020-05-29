@@ -206,9 +206,13 @@ Editer le fichier /etc/network/interfaces
 
 [repertoire projet]$  vi /etc/network/interfaces
 
+auto lo
+iface lo inet loopback
+
+allow-hotplug eth0
 iface eth0 inet static
-  address 192.168.0.11
-  netmask 255.255.255.0
+   address 192.168.0.11
+   netmask 255.255.255.0
 
 Sauvegarder avec vi le fichier interfaces (: puis x! et entrée)
 
