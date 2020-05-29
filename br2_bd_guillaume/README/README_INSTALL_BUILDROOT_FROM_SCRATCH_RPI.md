@@ -236,6 +236,13 @@ Depuis le PC host : costa@costa-Latitude-5590:~$ ping 192.168.0.11
 Depuis la RPI4 : # ping 192.168.0.10
 
 
+Pour lancer automatiquement  " $ ifup eth0" au démarrage de la rpi4 :
+$ vi /etc/rc.local
+
+ifup eth0
+
+
+
 ## STEP 7:  se connecter en SSH à la carte RPI buildroot
 
 * Depuis le PC host :
