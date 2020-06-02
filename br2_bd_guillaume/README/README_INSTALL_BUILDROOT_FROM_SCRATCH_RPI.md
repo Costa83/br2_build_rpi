@@ -52,7 +52,7 @@
 
 * Préparation de l’environnement :
 
-- [repertoire projet]$make O=${PWD}/output BR2_EXTERNAL=${PWD} -C /opt/buildroot stt_env_defconfig
+- [repertoire projet]$ make O=${PWD}/output BR2_EXTERNAL=${PWD} -C /opt/buildroot br2_install_rpi4_defconfig
 
 BR2_DEFCONFIG="$(BR2_EXTERNAL_PROJECT_PATH)/configs/br2_bd_guillaume_defconfig"
 BR2_DL_DIR="/opt/buildroot/dl"
