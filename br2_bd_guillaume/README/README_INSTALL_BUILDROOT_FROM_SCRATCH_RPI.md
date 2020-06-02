@@ -127,6 +127,8 @@ source "$BR2_EXTERNAL_PROJECT_PATH/package/my_dev/Config.in"
 
 [output]$ make menuconfig
 
+Dans l'onglet "LOAD" sélectionner .????/br2_build_rpi/br2_bd_guillaume/configs/.sqlite_rpi4_config
+Save sous output/.config
 
 
 ## STEP 5:
