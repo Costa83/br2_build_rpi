@@ -124,6 +124,7 @@ source "$BR2_EXTERNAL_PROJECT_PATH/package/my_dev/Config.in"
 
 
 [project]$ cd output
+
 [output]$ make menuconfig
 
 
