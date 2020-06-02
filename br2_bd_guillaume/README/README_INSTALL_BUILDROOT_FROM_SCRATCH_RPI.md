@@ -5,7 +5,7 @@
 - gcc
 - g++
 - openssl-dev
-- ncurces-dev
+- ncurses-devel or libncurses-dev
 - build-essential
 - minicom
 
