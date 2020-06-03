@@ -1,4 +1,4 @@
-# INSTALLER INFLUXDB SUR LE PC HOTE, DEPUIS ZERO :
+# INSTALLER INFLUXDB SUR CARTE ARM (RPI4), DEPUIS ZERO :
 
 
 * On est sur une architecture client-serveur où ici le client et le serveur est situé sur le PC hote.
