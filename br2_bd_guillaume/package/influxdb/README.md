@@ -88,6 +88,11 @@ $ influxd
 
 ## Prérequis 2: Installer la commande go pourconstruire le package depuis l’hote:
 
+$ mkdir home/DOWNLOAD/go/
+
+$ cd home/DOWNLOAD/go/
+
+
 $ sudo apt install golang-go
 
 $ git clone https://go.googlesource.com/go goroot
@@ -105,11 +110,15 @@ $ ./all.bash
 $  go version
 
 
-$ mkdir test_influxdb
+$ mkdir home/DOWNLOAD/go/test_influxdb   (au meme niveau que goroot)
 
-$ git clone .....
+$ mkdir home/GITHUB/
 
-$ cp test_influxdb/* test_influxdb    (influxdb/ measuretime/ go.mod go.sum main.go test_influxdb INFLUXDB_FROM_SRC.txt)
+$ cd home/GITHUB/
+
+$ git clone https://github.com/Costa83/br2_build_rpi.git
+
+$ cp home/GITHUB/br2_build_rpi/package/influxdb/* home/DOWNLOAD/go/test_influxdb/   (influxdb/ measuretime/ go.mod go.sum main.go test_influxdb INFLUXDB_FROM_SRC.txt)
 
 $ cd test_influxdb
 
