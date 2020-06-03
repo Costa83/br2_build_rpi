@@ -1,5 +1,0 @@
-config BR2_PACKAGE_INFLUXDB
-    bool "influxdb"
-    help
-        InfluxDB is a time-series database built from the ground up to 
-        handle high write and query loads.
