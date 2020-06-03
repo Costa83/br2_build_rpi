@@ -227,22 +227,33 @@ enregistrer la configuration sous : "usb0" et entrer et sortir de minicom
 Connecter un cable ethernet du PC host à la carte RPI4 (port ethernet).
 
 Attribution d'une IP statique sur la RPI4 ainsi que sur le PC host.
+
 Sur le PC host : 192.168.10 (0 pour O de host)
-Dans parametre filaire sous ubuntu-> Fenetre IPV4 -> Décocher automatique et cocher manuel pour la méthode IPV4, puis attribuer une IP fixe : 
-	Adresse 192.168.0.10   Maque de réseau 255.255.255.0  Passerelle : 192.168.0.1
+
+Dans parametre filaire sous ubuntu-> Fenetre IPV4 -> Décocher automatique et cocher manuel pour la méthode IPV4, puis
+
+attribuer une IP fixe : 
+	Adresse 192.168.0.10   Maque de réseau 255.255.255.0  
+	Passerelle : 192.168.0.1
 
 Sur la RPI4 : 192.168.0.90
+
 Editer le fichier /etc/network/interfaces
 
-[repertoire projet]$  vi /etc/network/interfaces
+- [repertoire projet]$  vi /etc/network/interfaces
 
 auto lo
+
 iface lo inet loopback
 
 allow-hotplug eth0
+
 iface eth0 inet static
+
    address 192.168.0.11
+   
    netmask 255.255.255.0
+   
 
 Sauvegarder avec vi le fichier interfaces (: puis x! et entrée)
 
@@ -270,7 +281,6 @@ Pour lancer automatiquement  " $ ifup eth0" au démarrage de la rpi4 :
 $ vi /etc/rc.local
 
 ifup eth0
-
 
 
 ## ETAPE 7:  se connecter en SSH à la carte RPI buildroot
