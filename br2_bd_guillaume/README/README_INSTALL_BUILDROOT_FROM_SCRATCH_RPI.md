@@ -180,8 +180,28 @@ $ make ou $ export FORCE_UNSAFE_CONFIGURE=1 && make              (problème/bug 
 
 - Insérer la carte uSD sur le PC.
 - S’assurer que la carte SD est bien démontée.
-- [repertoire projet]$  sudo umount /dev/sdb1
-- [repertoire projet]$  sudo umount /dev/sdb2
+
+- Identifier le disque associé à la carte uSD :
+- [repertoire projet]$ lsblk -o model,name,type,size
+
+
+
+
+- [repertoire projet]$  sudo umount /dev/sdX1
+- [repertoire projet]$  sudo umount /dev/sdX2
+
+- Effacer/Formater la carte uSD : où X est à remplacer suivant votre nom de disque
+- sudo dd if=/dev/zero of=/dev/sdX
+
+- Créer une partition qui occupe la totalité du disque :
+
+- [repertoire projet]$  sudo parted /dev/sdX mkpart primary 0% 100%
+
+
+- Formater la partition : ici FAT
+
+- [repertoire projet]$ sudo mkfs.vfat -n SAMSUNG /dev/sdX1
+
 - Ecrire l’image « sdcard.img » sur la carte uSD dev/mmcblk0 avec un bloc size de 1M
 
 - [repertoire projet]$  sudo dd if=output/images/sdcard.img of=/dev/sdb bs=1M
