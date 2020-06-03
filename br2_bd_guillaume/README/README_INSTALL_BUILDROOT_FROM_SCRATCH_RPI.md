@@ -132,7 +132,7 @@ Save sous output/.config
 
 
 ## STEP 5:
-* Génération de l'image système :
+* Génération de l'image système : (FROM SCRATCH) sans le load du .config
 
 
 Vérifier que le fichier bcm2711 est bien sélectionné, que le fichier dts est bien sélectionné, ainsi que le fichier stt_env_defconfig, ainsi que l’option build device tree blob.
@@ -165,7 +165,7 @@ Permet de réutiliser une configuration avec une version postérieur de Buildroo
 
 
 
-$ make
+$ make ou $ export FORCE_UNSAFE_CONFIGURE=1 && make              (problème/bug rencontré sous Ubuntu 20)
 
 ## STEP 6:
 *Téléversement de l’image générée sur une carte uSD :
