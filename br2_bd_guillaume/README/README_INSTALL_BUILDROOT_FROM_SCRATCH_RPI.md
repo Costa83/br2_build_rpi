@@ -1,5 +1,12 @@
-# Installing br2 for raspberry Pi 4'
-## Tools to install on host with apt install :
+# Installer BUILDROOT pour une RPI4 :
+
+## Installer sur un PC hôte la distribution Ubuntu :
+
+- Ubuntu 20.04 LTS version Gnome 3.36.1
+- Avec Balena Etcher
+
+
+## Outils/Logiciels à installer avec la commande apt sur le pc hôte avant de commencer l'installation :
 - git
 - make
 - gcc
@@ -10,7 +17,7 @@
 - minicom
 
 
-## STEP 0
+## ETAPE 0
 
 - Téléchargement de buildroot  depuis le site offciel :
 
@@ -19,7 +26,7 @@
 - $ cd ~
 - [~]$ tar -xjf buildroot-2018.05.tar.bz2
 
-## STEP 1
+## ETAPE 1
 
 * Installation de buildroot pour tous projets : 
 
@@ -30,7 +37,7 @@
 - [buildroot]# mkdir dl
 - [buildroot]# chmod a+w ./dl
 
-## STEP 2
+## ETAPE 2
 
 * Création du répertoire de travail :
 
@@ -41,14 +48,14 @@
 - [repertoire projet/stt_env]$ touch external.mk
 - [repertoire projet/stt_env]$ mkdir board configs overlays patches package
 
-## STEP 3 :
+## ETAPE 3 :
 * Configuration du répertoire de travail : 
 
 - [repertoire projet/stt_env]$ cd configs
 - [repertoire projet/stt_env/configs]$ touch stt_env_defconfig	
 - [repertoire projet/stt_env/configs]$ cp opt/buildroot/configs/raspberry4_defconfig stt_env_defconfig
 
-## STEP 4 :
+## ETAPE 4 :
 
 * Préparation de l’environnement :
 
@@ -97,7 +104,7 @@ BR2_ROOTFS_POST_BUILD_SCRIPT="board/raspberrypi4/post-build.sh"
 BR2_ROOTFS_POST_IMAGE_SCRIPT="board/raspberrypi4/post-image.sh"
 BR2_ROOTFS_POST_SCRIPT_ARGS="--add-miniuart-bt-overlay"
 
-## STEP 4:
+## ETAPE 4:
 
 * Ajout du projet à un git : Permet d’identifer les étapes de construction du système.
 
@@ -110,7 +117,7 @@ BR2_ROOTFS_POST_SCRIPT_ARGS="--add-miniuart-bt-overlay"
 - $ git show –pretty=--name-only     #Pour afficher les fichiers qui ont été commit.
 
 
-Utiliser les outils proposer par Buildroot :
+Utiliser les outils proposés par Buildroot :
 
 external.mk : 
 
@@ -131,7 +138,7 @@ Dans l'onglet "LOAD" sélectionner .????/br2_build_rpi/br2_bd_guillaume/configs/
 Save sous output/.config
 
 
-## STEP 5:
+## ETAPE 5:
 * Génération de l'image système : (FROM SCRATCH) sans le load du .config
 
 
@@ -167,7 +174,7 @@ Permet de réutiliser une configuration avec une version postérieur de Buildroo
 
 $ make ou $ export FORCE_UNSAFE_CONFIGURE=1 && make              (problème/bug rencontré sous Ubuntu 20)
 
-## STEP 6:
+## ETAPE 6:
 *Téléversement de l’image générée sur une carte uSD :
 
 
@@ -195,7 +202,7 @@ enregistrer la configuration sous : "usb0" et entrer et sortir de minicom
 
 [repertoire projet]$  minicom -D /dev/ttyUSB0 usb0
 
-## STEP 7 : Connecting the raspberry to network
+## ETAPE 7 : Connection de la raspberry Pi au réseau
 
 Connecter un cable ethernet du PC host à la carte RPI4 (port ethernet).
 
@@ -246,7 +253,7 @@ ifup eth0
 
 
 
-## STEP 7:  se connecter en SSH à la carte RPI buildroot
+## ETAPE 7:  se connecter en SSH à la carte RPI buildroot
 
 * Depuis le PC host :
 
