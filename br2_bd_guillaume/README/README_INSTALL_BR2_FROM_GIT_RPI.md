@@ -1,24 +1,23 @@
-﻿INSTALL ENV BR2 DEPUIS LE GIT :
-#######################################
+# Installer l'environnement buildroot sur la raspberry PI 4
 
 
- (Utiliser le fichier DEFCONFI propre à la RPI4 et le fichier .config).
+ (Possibilité d'utiliser le fichier DEFCONFIG propre à la RPI4 et le fichier .config).
 
-1- Se positionner dans ~/SMILE_STAGE/SOURCES_GIT/BR2_BUILD_RPI$
-
-
-2- git clone https://github.com/Costa83/br2_build_rpi.git
+* 1 Se positionner dans ~/SMILE_STAGE/SOURCES_GIT/BR2_BUILD_RPI$
 
 
-3- cd br2_build_rpi/br2_bd_guillaume/
-
-4- br2_build_rpi/br2_bd_guillaume$ make O=${PWD}/output BR2_EXTERNAL=${PWD} -C /opt/buildroot br2_install_rpi4_defconfig
+* 2 git clone https://github.com/Costa83/br2_build_rpi.git
 
 
-5- br2_build_rpi/br2_bd_guillaume/output$ make menuconfig
+* 3 cd br2_build_rpi/br2_bd_guillaume/
+
+* 4 br2_build_rpi/br2_bd_guillaume$ make O=${PWD}/output BR2_EXTERNAL=${PWD} -C /opt/buildroot br2_install_rpi4_defconfig
 
 
-6- On sélectionne les options suivantes ou alors on charge un fichier .config 
+* 5 br2_build_rpi/br2_bd_guillaume/output$ make menuconfig
+
+
+* 6 On sélectionne les options suivantes ou alors on charge un fichier .config permettant de charger toutes ses configurations.
 
 On sélectionne différentes fonctionnalités nécessaires au projet :
 - Target packags → Networking applications : cocher « dropbear »
@@ -39,14 +38,14 @@ On active le support du C++ :
 project_defconfig contient le minimum pour reconstruite .config
 Permet de réutiliser une configuration avec une version postérieur de Buildroot
 
-7- Sauvegarde du fichier .config résultant de la configuration de l'outil menuconfig
+* 7 Sauvegarde du fichier .config résultant de la configuration de l'outil menuconfig
 /br2_bd_guillaume# cp .config ../configs/.br2_intall_rpi4_config
 
-8- Lancer la compilation : 
+* 8 Lancer la compilation : 
 
 /SMILE_STAGE/SOURCES_GIT/BR2_BUILD_RPI/br2_build_rpi/br2_bd_guillaume/output$ make
 
-9- Téléversement de l’image générée sur une carte uSD :
+* 9 Téléversement de l’image générée sur une carte uSD :
 
 Insérer la carte uSD sur le PC.
 
@@ -73,12 +72,9 @@ On mets dans configuration du port série -> port série : /dev/ttyUSB0 puis ent
 enregistrer la configuration sous : "usb0" et entrer et sortir de minicom
 
 [repertoire projet]$  sudo minicom -D /dev/ttyUSB0 usb0
-
-####################################################################
-####################################################################
-
-
- 			STEP 5 : Connecting the raspberry to network
+ 
+ 
+ ## Connection de la raspberry PI 4 au réseau
 
 Connecter un cable ethernet du PC host à la carte RPI4 (port ethernet).
 
@@ -118,10 +114,7 @@ Depuis le PC host : costa@costa-Latitude-5590:~$ ping 192.168.0.11
 Depuis la RPI4 : # ping 192.168.0.10
 
 
-####################################################################
-####################################################################
-
-		ETAPE 6 se connecter en SSH à la carte RPI buildroot
+## Connection en SSH à la carte RPI buildroot :
 
 Depuis le PC host :
 
