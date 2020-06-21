@@ -11,7 +11,7 @@ BR2_HOST_GCC_AT_LEAST_7=y
 
 #
 # Target options
-#
+# 
 BR2_ARCH_HAS_MMU_OPTIONAL=y
 # BR2_arcle is not set
 # BR2_arceb is not set
