@@ -1,6 +1,6 @@
 # Installer BUILDROOT pour une RPI4 :
 
-## Installer sur un PC hôte la distribution Ubuntu :
+## Installer sur un PC hôte la distribution Ubuntu : 
 
 - Ubuntu 20.04 LTS version Gnome 3.36.1
 - Avec Balena Etcher
