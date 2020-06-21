@@ -264,8 +264,7 @@ Activer l'interface eth0 avec la commande :
 Vérifiez que l'interface eth0 est bien montée: inet addr doit etre fixé à 192.168.0.11
 
 [repertoire projet]$  ifconfig
-
-- # ifconfig                                                                      
+                                                                   
 eth0      Link encap:Ethernet  HWaddr DC:A6:32:04:A4:8A                         
           inet addr:192.168.0.11  Bcast:0.0.0.0  Mask:255.255.255.0             
           inet6 addr: fe80::dea6:32ff:fe04:a48a/64 Scope:Link 
