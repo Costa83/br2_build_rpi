@@ -1,6 +1,6 @@
 # Installer l'environnement buildroot sur la raspberry PI 4
 
-
+ 
  (Possibilité d'utiliser le fichier DEFCONFIG propre à la RPI4 et le fichier .config).
 
 * 1 Se positionner dans ~/SMILE_STAGE/SOURCES_GIT/BR2_BUILD_RPI$
